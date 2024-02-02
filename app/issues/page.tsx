@@ -2,29 +2,8 @@ import { Suspense } from "react";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { db } from "@/lib/db";
-import { ColumnDef } from "@tanstack/react-table";
 import AllIssues2 from "./_components/issues-all2";
 import { Issue } from "@prisma/client";
-
-export interface ColumnsDataI {
-  accessorKey: string;
-  header: string;
-}
-
-export const columns: ColumnDef<ColumnsDataI>[] = [
-  {
-    accessorKey: "subject",
-    header: "Subject",
-  },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-  },
-];
 
 const IssuesPage = async () => {
   const issues: Issue[] = await db.issue.findMany({
