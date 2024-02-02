@@ -87,8 +87,8 @@ export default async function Dashboardpage() {
             </CardContent>
           </Card>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-          <Card className="col-span-3 md:col-span-4">
+        <div className="grid gap-4  md:grid-cols-2 lg:grid-cols-7">
+          <Card className=" md:col-span-4">
             <CardHeader>
               <CardTitle>Overview</CardTitle>
             </CardHeader>
@@ -96,7 +96,7 @@ export default async function Dashboardpage() {
               <Overview />
             </CardContent>
           </Card>
-          <Card className="col-span-3">
+          <Card className=" md:col-span-3">
             <CardHeader>
               <CardTitle>Latest Issues</CardTitle>
               <CardDescription>New issues this month.</CardDescription>
