@@ -1,3 +1,4 @@
+import { fetchIssues } from "@/actions/fetch-issues";
 import { Overview } from "@/components/overview";
 import {
   Card,
@@ -6,18 +7,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { db } from "@/lib/db";
+import { Issue } from "@prisma/client";
 import { AiFillDatabase } from "react-icons/ai";
 import { FaRegEnvelope } from "react-icons/fa";
 import { LuNetwork } from "react-icons/lu";
 import { TbActivityHeartbeat } from "react-icons/tb";
 import DashboardIssues from "./_components/dashboard-issues";
-import { Issue } from "@prisma/client";
 
 export default async function Dashboardpage() {
-  const issues: Issue[] = await db.issue.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  const issues: Issue[] = await fetchIssues();
 
   const openIssues = issues.filter((issue) => issue.status === "OPEN");
   const closedIssues = issues.filter((issue) => issue.status === "CLOSED");

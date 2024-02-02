@@ -13,82 +13,75 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
+import { Issue } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const DashboardIssues = ({ issuesList }: any) => {
+const DashboardIssues = ({ issuesList }: { issuesList: Issue[] }) => {
   const router = useRouter();
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
     router.refresh();
+    setDataLoaded(true);
     // eslint-disable-next-line
   }, []);
   return (
-    <div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Title</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Action</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {issuesList.slice(0, 3).map((issue1: any) => (
-            <TableRow key={issue1.id}>
-              <TableCell className="font-medium">
-                <Link
-                  key={issue1.id}
-                  href={`/issues/${issue1.id}`}
-                  className="cursor-pointer"
-                >
-                  {issue1.subject.slice(0, 5)}
-                </Link>
-              </TableCell>
-              <TableCell>
-                <Badge
-                  className={cn("rounded-sm", {
-                    "bg-indigo-400": issue1.status === "OPEN",
-                    "bg-green-400": issue1.status === "CLOSED",
-                    "bg-yellow-400": issue1.status === "IN_PROGRESS",
-                  })}
-                >
-                  {issue1.status}
-                </Badge>
-              </TableCell>
-              <TableCell className="font-medium">
-                <Link
-                  key={issue1.id}
-                  href={`/issues/${issue1.id}`}
-                  className="cursor-pointer"
-                >
-                  <Button variant="link">details</Button>
-                </Link>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        <Link href="/issues">
-          <Button variant="link">Show more</Button>
-        </Link>
-      </Table>
-    </div>
+    <>
+      {dataLoaded && (
+        <div>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">Title</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Action</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {issuesList &&
+                issuesList.slice(0, 3).map((issue1: any) => (
+                  <TableRow key={issue1.id}>
+                    <TableCell className="font-medium">
+                      <Link
+                        key={issue1.id}
+                        href={`/issues/${issue1.id}`}
+                        className="cursor-pointer"
+                      >
+                        {issue1.subject.slice(0, 5)}
+                      </Link>
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        className={cn("rounded-sm", {
+                          "bg-indigo-400": issue1.status === "OPEN",
+                          "bg-green-400": issue1.status === "CLOSED",
+                          "bg-yellow-400": issue1.status === "IN_PROGRESS",
+                        })}
+                      >
+                        {issue1.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="font-medium">
+                      <Link
+                        key={issue1.id}
+                        href={`/issues/${issue1.id}`}
+                        className="cursor-pointer"
+                      >
+                        <Button variant="link">details</Button>
+                      </Link>
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+            <Link href="/issues">
+              <Button variant="link">Show more</Button>
+            </Link>
+          </Table>
+        </div>
+      )}
+    </>
   );
 };
 
 export default DashboardIssues;
-
-// AllIssues.Skeleton = function SkeletonBoardList() {
-//   return (
-//     <div className="grid gird-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-//       <Skeleton className="aspect-video h-full w-full p-2" />
-//       <Skeleton className="aspect-video h-full w-full p-2" />
-//       <Skeleton className="aspect-video h-full w-full p-2" />
-//       <Skeleton className="aspect-video h-full w-full p-2" />
-//       <Skeleton className="aspect-video h-full w-full p-2" />
-//       <Skeleton className="aspect-video h-full w-full p-2" />
-//       <Skeleton className="aspect-video h-full w-full p-2" />
-//       <Skeleton className="aspect-video h-full w-full p-2" />
-//     </div>
-//   );
-// };

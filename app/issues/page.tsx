@@ -1,14 +1,9 @@
-import { Suspense } from "react";
-
-import { Skeleton } from "@/components/ui/skeleton";
-import { db } from "@/lib/db";
-import AllIssues2 from "./_components/issues-all2";
+import { fetchIssues } from "@/actions/fetch-issues";
 import { Issue } from "@prisma/client";
+import AllIssues2 from "./_components/issues-all2";
 
 const IssuesPage = async () => {
-  const issues: Issue[] = await db.issue.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  const issues: Issue[] = await fetchIssues();
 
   return (
     <div className="w-full flex flex-col mb-20">
@@ -19,9 +14,7 @@ const IssuesPage = async () => {
       </div>
 
       <div className="flex  px-2">
-        <Suspense fallback={<Skeleton />}>
-          <AllIssues2 data={issues} />
-        </Suspense>
+        <AllIssues2 data={issues} />
       </div>
     </div>
   );

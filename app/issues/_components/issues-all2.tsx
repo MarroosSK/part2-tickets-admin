@@ -15,12 +15,14 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import { ArrowUpDown, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Issue } from "@prisma/client";
 
 const AllIssues2 = ({ data }: { data: Issue[] }) => {
   const router = useRouter();
+
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   const currentStatus: string[] = ["OPEN", "IN_PROGRESS", "CLOSED"];
   const [showStatusOptions, setShowStatusOptions] = useState<boolean>(false);
@@ -51,90 +53,97 @@ const AllIssues2 = ({ data }: { data: Issue[] }) => {
     filterData();
     // eslint-disable-next-line
   }, [searchSubject, ticketStatus]);
-  return (
-    <div className="w-full">
-      <Input
-        placeholder="Filter subject..."
-        value={searchSubject}
-        onChange={(event) => setSearchSubject(event.target.value)}
-        className="max-w-sm mb-2"
-      />
+  useEffect(() => {
+    setDataLoaded(true);
+  }, []);
 
-      <Table className="border">
-        <TableHeader>
-          <TableRow>
-            <TableHead className="hidden md:block">Id</TableHead>
-            <TableHead>Title</TableHead>
-            <TableHead className="relative flex items-center  gap-x-2 ">
-              Status{" "}
-              <ArrowUpDown
-                size={20}
-                onClick={() => setShowStatusOptions(!showStatusOptions)}
-                className="cursor-pointer hover:text-slate-800"
-              />
-              {showStatusOptions && (
-                <div className="p-2 z-10 absolute top-10 left-0 w-48 h-20 bg-slate-100 rounded-md ">
-                  {currentStatus.map((item, index) => (
-                    <p
-                      key={index}
-                      className="pl-2 text-slate-500 hover:text-slate-800 cursor-pointer"
-                      onClick={() => {
-                        setTicketStatus(item);
-                        setShowStatusOptions(false);
-                      }}
+  return (
+    <>
+      {dataLoaded && (
+        <div className="w-full">
+          <Input
+            placeholder="Filter subject..."
+            value={searchSubject}
+            onChange={(event) => setSearchSubject(event.target.value)}
+            className="max-w-sm mb-2"
+          />
+          <Table className="border">
+            <TableHeader>
+              <TableRow>
+                <TableHead className="hidden md:block">Id</TableHead>
+                <TableHead>Title</TableHead>
+                <TableHead className="relative flex items-center  gap-x-2 ">
+                  Status{" "}
+                  <ArrowUpDown
+                    size={20}
+                    onClick={() => setShowStatusOptions(!showStatusOptions)}
+                    className="cursor-pointer hover:text-slate-800"
+                  />
+                  {showStatusOptions && (
+                    <div className="p-2 z-10 absolute top-10 left-0 w-48 h-20 bg-slate-100 rounded-md ">
+                      {currentStatus.map((item, index) => (
+                        <p
+                          key={index}
+                          className="pl-2 text-slate-500 hover:text-slate-800 cursor-pointer"
+                          onClick={() => {
+                            setTicketStatus(item);
+                            setShowStatusOptions(false);
+                          }}
+                        >
+                          {item}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+                  {ticketStatus !== "" && (
+                    <X onClick={() => resetFilter()} className="text-red-600" />
+                  )}
+                </TableHead>
+                <TableHead>Action</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filterName.map((issue1: any) => (
+                <TableRow key={issue1.id}>
+                  <TableCell className="font-medium hidden md:block">
+                    {issue1.id}
+                  </TableCell>
+                  <TableCell className="font-medium">
+                    <Link
+                      key={issue1.id}
+                      href={`/issues/${issue1.id}`}
+                      className="cursor-pointer"
                     >
-                      {item}
-                    </p>
-                  ))}
-                </div>
-              )}
-              {ticketStatus !== "" && (
-                <X onClick={() => resetFilter()} className="text-red-600" />
-              )}
-            </TableHead>
-            <TableHead>Action</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {filterName.map((issue1: any) => (
-            <TableRow key={issue1.id}>
-              <TableCell className="font-medium hidden md:block">
-                {issue1.id}
-              </TableCell>
-              <TableCell className="font-medium">
-                <Link
-                  key={issue1.id}
-                  href={`/issues/${issue1.id}`}
-                  className="cursor-pointer"
-                >
-                  {issue1.subject.slice(0, 5)}
-                </Link>
-              </TableCell>
-              <TableCell>
-                <Badge
-                  className={cn("rounded-sm", {
-                    "bg-indigo-400": issue1.status === "OPEN",
-                    "bg-green-400": issue1.status === "CLOSED",
-                    "bg-yellow-400": issue1.status === "IN_PROGRESS",
-                  })}
-                >
-                  {issue1.status}
-                </Badge>
-              </TableCell>
-              <TableCell className="font-medium">
-                <Link
-                  key={issue1.id}
-                  href={`/issues/${issue1.id}`}
-                  className="cursor-pointer"
-                >
-                  <Button variant="link">details</Button>
-                </Link>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+                      {issue1.subject.slice(0, 5)}
+                    </Link>
+                  </TableCell>
+                  <TableCell>
+                    <Badge
+                      className={cn("rounded-sm", {
+                        "bg-indigo-400": issue1.status === "OPEN",
+                        "bg-green-400": issue1.status === "CLOSED",
+                        "bg-yellow-400": issue1.status === "IN_PROGRESS",
+                      })}
+                    >
+                      {issue1.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="font-medium">
+                    <Link
+                      key={issue1.id}
+                      href={`/issues/${issue1.id}`}
+                      className="cursor-pointer"
+                    >
+                      <Button variant="link">details</Button>
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      )}
+    </>
   );
 };
 
