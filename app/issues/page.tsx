@@ -15,7 +15,7 @@ const IssuesPage = async () => {
         </h2>
       </div>
 
-      <div className="flex  px-2">
+      <div>
         <AllIssues2 data={issues} />
       </div>
     </div>

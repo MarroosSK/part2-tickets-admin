@@ -59,7 +59,7 @@ const AllIssues2 = ({ data }: { data: Issue[] }) => {
   return (
     <>
       {dataLoaded && (
-        <div className="w-full">
+        <div className="w-full flex-1">
           <Input
             placeholder="Filter subject..."
             value={searchSubject}
