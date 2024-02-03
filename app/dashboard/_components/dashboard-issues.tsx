@@ -22,7 +22,6 @@ const DashboardIssues = ({ issuesList }: { issuesList: Issue[] }) => {
   const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
-    router.refresh();
     setDataLoaded(true);
     // eslint-disable-next-line
   }, []);

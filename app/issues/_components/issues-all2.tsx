@@ -49,7 +49,6 @@ const AllIssues2 = ({ data }: { data: Issue[] }) => {
     setTicketStatus("");
   };
   useEffect(() => {
-    router.refresh();
     filterData();
     // eslint-disable-next-line
   }, [searchSubject, ticketStatus]);

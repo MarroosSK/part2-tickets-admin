@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { fetchIssues } from "@/actions/fetch-issues";
 import { Overview } from "@/components/overview";
 import {

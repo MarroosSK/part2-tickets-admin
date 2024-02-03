@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { fetchIssues } from "@/actions/fetch-issues";
 import { Issue } from "@prisma/client";
 import AllIssues2 from "./_components/issues-all2";
