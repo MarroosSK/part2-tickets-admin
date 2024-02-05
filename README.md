@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Tickets panel - admin dashboard app
 
-First, run the development server:
+This application is inspired in support web page i found on the internet. 
+Logged in admins can track current tickets, change their status or make operations (filter/sort) with them.
+It uses next auth, either create random email + password, or use these:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+email: john@gmail.com
+password: 123456
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Screenshots
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+![App Screenshot](https://i.postimg.cc/PJ9rHQKx/admin-dashboard.jpg)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Authors
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [@MarroosSK](https://github.com/MarroosSK)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Demo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+https://part2-tickets-admin.vercel.app
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## Tech Stack
+
+**Technologies used:**  Next.js Typescript, Zustand, Axios, ShadCn, PostgreSQL
+
+
+
+## Feedback
+
+If you have any feedback, please reach out to me at maros1chmel@gmail.com
+
+
