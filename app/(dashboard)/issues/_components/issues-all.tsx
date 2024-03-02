@@ -14,12 +14,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { ArrowUpDown, X } from "lucide-react";
-import { Suspense, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { Issue } from "@prisma/client";
+import { ArrowUpDown, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { SkeletonIssues } from "./skeleton-issues";
 
-const AllIssues2 = ({ data }: { data: Issue[] }) => {
+const AllIssues = ({ data }: { data: Issue[] }) => {
   const router = useRouter();
 
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -53,15 +54,16 @@ const AllIssues2 = ({ data }: { data: Issue[] }) => {
     // eslint-disable-next-line
   }, [searchSubject, ticketStatus]);
   useEffect(() => {
+    router.refresh();
     setDataLoaded(true);
   }, []);
 
   return (
     <>
-      {dataLoaded && (
-        <div className="w-full flex-1">
+      {dataLoaded ? (
+        <div className=" space-y-4 p-8">
           <Input
-            placeholder="Filter subject..."
+            placeholder="Filter issue..."
             value={searchSubject}
             onChange={(event) => setSearchSubject(event.target.value)}
             className="max-w-sm mb-2"
@@ -104,21 +106,21 @@ const AllIssues2 = ({ data }: { data: Issue[] }) => {
             <TableBody>
               {filterName.map((issue1: any) => (
                 <TableRow key={issue1.id}>
-                  <TableCell className="font-medium hidden md:block">
+                  <TableCell className="font-medium hidden md:block truncate">
                     {issue1.id}
                   </TableCell>
                   <TableCell className="font-medium">
                     <Link
                       key={issue1.id}
                       href={`/issues/${issue1.id}`}
-                      className="cursor-pointer"
+                      className="cursor-pointer  truncate"
                     >
-                      {issue1.subject.slice(0, 5)}
+                      {issue1.subject}
                     </Link>
                   </TableCell>
                   <TableCell>
                     <Badge
-                      className={cn("rounded-sm", {
+                      className={cn("truncate rounded-sm", {
                         "bg-indigo-400": issue1.status === "OPEN",
                         "bg-green-400": issue1.status === "CLOSED",
                         "bg-yellow-400": issue1.status === "IN_PROGRESS",
@@ -141,9 +143,11 @@ const AllIssues2 = ({ data }: { data: Issue[] }) => {
             </TableBody>
           </Table>
         </div>
+      ) : (
+        <SkeletonIssues />
       )}
     </>
   );
 };
 
-export default AllIssues2;
+export default AllIssues;

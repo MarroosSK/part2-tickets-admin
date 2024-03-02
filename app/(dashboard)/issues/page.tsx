@@ -1,8 +1,8 @@
-export const dynamic = "force-dynamic";
+//export const dynamic = "force-dynamic";
 
 import { fetchIssues } from "@/actions/fetch-issues";
 import { Issue } from "@prisma/client";
-import AllIssues2 from "./_components/issues-all2";
+import AllIssues from "./_components/issues-all";
 
 const IssuesPage = async () => {
   const issues: Issue[] = await fetchIssues();
@@ -10,13 +10,13 @@ const IssuesPage = async () => {
   return (
     <div className="w-full flex flex-col mb-20">
       <div>
-        <h2 className="text-4xl font-bold text-center text-indigo-400 mb-4">
-          Tickets
+        <h2 className="pl-8 pt-12 md:pt-0 mt-4 text-2xl font-extrabold tracking-tight lg:text-4xl text-slate-600">
+          Issues
         </h2>
       </div>
 
       <div>
-        <AllIssues2 data={issues} />
+        <AllIssues data={issues} />
       </div>
     </div>
   );

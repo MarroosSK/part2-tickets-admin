@@ -1,12 +1,11 @@
 import { Toaster } from "@/components/ui/sonner";
-import { ModalProvider } from "@/providers/modal-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
-import { Inter } from "next/font/google";
+import { Rubik } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Rubik({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Admin Dashboard",
@@ -29,7 +28,6 @@ export default function RootLayout({
         >
           <main className="h-full">
             <SessionProvider>
-              <ModalProvider />
               {children}
               <Toaster position="bottom-center" />
             </SessionProvider>

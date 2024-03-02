@@ -1,20 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { Bug, Medal } from "lucide-react";
-import { Poppins } from "next/font/google";
-import Link from "next/link";
-import { LoginButton } from "../auth/_components/login-button";
-import { useSession } from "next-auth/react";
 import { Spinner } from "@/components/spinner";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
 
-const textFont = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { LoginButton } from "../auth/_components/login-button";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -33,14 +26,9 @@ export default function Home() {
         </div>
       </div>
 
-      <div
-        className={cn(
-          "text-xl md:text-6xl text-zinc-500 mt-4 max-w-xs md:max-w-2xl text-center mx-auto",
-          textFont.className
-        )}
-      >
+      <h1 className="mt-4 text-3xl font-extrabold tracking-tight lg:text-6xl text-slate-600">
         Admin Dashboard
-      </div>
+      </h1>
       {status === "loading" && <Spinner />}
       {status === "authenticated" && <p>Signed in as {session?.user?.email}</p>}
       <div className="flex gap-x-4">
