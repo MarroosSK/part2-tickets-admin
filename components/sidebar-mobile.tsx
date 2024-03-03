@@ -6,15 +6,14 @@ import { Squash as Hamburger } from "hamburger-react";
 import { DoorOpen, Moon, Sun } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useTheme } from "next-themes";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useClickAway } from "react-use";
 import SidebarLinks from "./sidebar-links";
-import { SkeletonAvatar } from "./skeletons/skeleton-avatar";
 import { UserNav } from "./user-nav";
 
 const SidebarMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [status, setStatus] = useState(false);
+  //const [status, setStatus] = useState(false);
   const [themePicked, setThemePicked] = useState(false);
   const { setTheme } = useTheme();
 
@@ -33,7 +32,7 @@ const SidebarMobile = () => {
 
   return (
     <div ref={ref}>
-      <div className="fixed h-full z-[1001]">
+      <div className="fixed  z-[1001]">
         <Hamburger toggled={isOpen} size={20} toggle={setIsOpen} />
       </div>
       <AnimatePresence>

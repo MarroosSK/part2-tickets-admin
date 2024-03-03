@@ -130,7 +130,7 @@ const DashboardAll = ({ issues }: { issues: Issue[] }) => {
           </TabsContent>
           <TabsContent value="table">
             {" "}
-            <div className="">
+            <div>
               <DashboardIssuesTable columns={columns} data={issues} />
             </div>
           </TabsContent>
