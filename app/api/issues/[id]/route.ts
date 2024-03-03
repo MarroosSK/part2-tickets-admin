@@ -19,7 +19,7 @@ export async function PATCH(
 
   // Kontrola platnosti nového statusu
   if (!["OPEN", "IN_PROGRESS", "CLOSED"].includes(status)) {
-    return NextResponse.json({ error: "Neplatný nový stav" }, { status: 400 });
+    return NextResponse.json({ error: "Invalid status" }, { status: 400 });
   }
 
   const updatedIssue = await db.issue.update({

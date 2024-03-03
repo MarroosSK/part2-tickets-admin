@@ -1,11 +1,4 @@
-import {
-  HomeIcon,
-  LayoutDashboard,
-  List,
-  LucideIcon,
-  Plus,
-  Settings,
-} from "lucide-react";
+import { HomeIcon, LayoutDashboard, LucideIcon } from "lucide-react";
 
 interface navLinksI {
   name: string;
@@ -16,6 +9,4 @@ interface navLinksI {
 export const navData: navLinksI[] = [
   { name: "Home", href: "/", icon: HomeIcon },
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Issues", href: "/issues", icon: List },
-  { name: "New Issue", href: "/new", icon: Plus },
 ];

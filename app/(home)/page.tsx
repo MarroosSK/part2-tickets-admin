@@ -45,6 +45,7 @@ export default function Home() {
           <Button
             className="mt-6 bg-indigo-500 text-white hover:bg-indigo-700 hover:text-indigo-100 transition-all"
             size="lg"
+            asChild
           >
             <Link href={"/dashboard"}>Open Dashboard</Link>
           </Button>

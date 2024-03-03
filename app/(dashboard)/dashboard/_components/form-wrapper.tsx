@@ -23,12 +23,6 @@ const FormWrapper = ({ children }: { children: React.ReactNode }) => {
         </div>
       </CardHeader>
       <CardContent>{children}</CardContent>
-
-      <CardFooter>
-        <Link href="/">
-          <ArrowLeft />
-        </Link>
-      </CardFooter>
     </Card>
   );
 };

@@ -9,7 +9,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 import { useClickAway } from "react-use";
 import SidebarLinks from "./sidebar-links";
-import { SkeletonAvatar } from "./skeleton-avatar";
+import { SkeletonAvatar } from "./skeletons/skeleton-avatar";
 import { UserNav } from "./user-nav";
 
 const SidebarMobile = () => {
@@ -27,9 +27,9 @@ const SidebarMobile = () => {
     setThemePicked(!themePicked);
   };
 
-  useEffect(() => {
-    setStatus(true);
-  }, []);
+  // useEffect(() => {
+  //   setStatus(true);
+  // }, []);
 
   return (
     <div ref={ref}>
@@ -49,7 +49,8 @@ const SidebarMobile = () => {
         >
           <nav className="grid items-start gap-2 sticky top-[50px] overflow-hidden">
             <div className="flex items-center justify-between gap-x-2 p-4 border-b">
-              {status ? <UserNav /> : <SkeletonAvatar />}
+              {/* {status ? <UserNav /> : <SkeletonAvatar />} */}
+              <UserNav />
 
               {themePicked ? (
                 <Sun onClick={() => handleTheme("light")} />

@@ -1,21 +1,10 @@
 // export const dynamic = "force-dynamic";
 
 import { fetchIssues } from "@/actions/fetch-issues";
-import { Overview } from "@/components/overview";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Issue } from "@prisma/client";
-import { AiFillDatabase } from "react-icons/ai";
-import { FaRegEnvelope } from "react-icons/fa";
-import { LuNetwork } from "react-icons/lu";
-import { TbActivityHeartbeat } from "react-icons/tb";
-import DashboardIssues from "./_components/dashboard-issues";
 import DashboardAll from "./_components/dashboard-all";
+import { Suspense } from "react";
+import { SkeletonBox } from "@/components/skeletons/skeleton-box";
 
 export default async function DashboardPage() {
   const issues: Issue[] = await fetchIssues();
@@ -27,8 +16,9 @@ export default async function DashboardPage() {
           Dashboard
         </h2>
       </div>
-
-      <DashboardAll issues={issues} />
+      <Suspense fallback={<SkeletonBox />}>
+        <DashboardAll issues={issues} />
+      </Suspense>
     </main>
   );
 }

@@ -34,12 +34,11 @@ const DashboardIssues = ({ issuesList }: { issuesList: Issue[] }) => {
               <TableRow>
                 <TableHead className="w-[100px]">Title</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {issuesList &&
-                issuesList.slice(0, 3).map((issue1: any) => (
+                issuesList.slice(0, 5).map((issue1: any) => (
                   <TableRow key={issue1.id}>
                     <TableCell className="font-medium">
                       <Link
@@ -61,19 +60,10 @@ const DashboardIssues = ({ issuesList }: { issuesList: Issue[] }) => {
                         {issue1.status}
                       </Badge>
                     </TableCell>
-                    <TableCell className="font-medium">
-                      <Link
-                        key={issue1.id}
-                        href={`/issues/${issue1.id}`}
-                        className="cursor-pointer"
-                      >
-                        <Button variant="link">details</Button>
-                      </Link>
-                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>
-            <Link href="/issues">
+            <Link href="/issues" className="my-4">
               <Button variant="link">Show more</Button>
             </Link>
           </Table>
